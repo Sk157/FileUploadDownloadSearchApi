@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>File API</title>
+<link th:href="@{/main.css}" rel="stylesheet" />
+</head>
+<body>
+<div  id="searchNavbar">
+<form class="centring" th:action="@{/search}" method="get">
+<input  type="search" name="keyword" size="90" placeholder="search file" required/>
+&nbsp;
+<input type="submit" value="Search" class="btn btn-outline-success my-2 my-sm-0"/>
+</form>
+</div>
+<h3>Upload Multiple PDF Files</h3>
+<form class ="centring" id="uploadFiles" name="uploadFiles" method="post" 
+     th:action=@{/uploadFiles} encType="multipart/form-data">
+       <input  type="file" name="files" multiple required />
+       <button type="submit">Submit</button>
+     </form>
+   <div>
+     <h3>List of Documents</h3>
+     <table class="centre">
+       <thead>
+         <tr>
+           <th>Id</th>
+           <th>Name</th>
+           <th>Download Link</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr th:each="doc:${docs}">
+           <td th:text="${doc.Id}" />
+           <td th:text="${doc.docName}"/>
+           <td><a th:href="@{'/downloadFile/'+${doc.id}}">Download</a></td>
+         </tr>
+       </tbody>
+     </table>
+   </div>
+
+</body>
+</html>
